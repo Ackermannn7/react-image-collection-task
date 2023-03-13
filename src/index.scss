@@ -16,7 +16,6 @@ body {
 .App {
   padding: 50px;
   width: 100%;
-  max-width: 1200px;
 }
 
 h1 {
@@ -154,6 +153,20 @@ h1 {
     &.active {
       background-color: black;
       color: #fff;
+    }
+  }
+}
+
+.collection-review {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__images {
+    img {
+      margin: 10px;
+      width: 400px;
+      height: 400px;
     }
   }
 }
