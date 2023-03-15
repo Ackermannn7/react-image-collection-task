@@ -1,13 +1,14 @@
 import React from "react";
 import { Collection } from "./Collection";
-const categories = [
+import { Link } from "react-router-dom";
+export const categories = [
   { name: "Все" },
   { name: "Море" },
   { name: "Горы" },
   { name: "Архитектура" },
   { name: "Города" },
 ];
-export const Home = () => {
+const Home = () => {
   const [categoryId, setCategoryId] = React.useState(0);
   const [page, setPage] = React.useState(1);
   const [isLoading, setIsLoading] = React.useState(true);
@@ -35,7 +36,7 @@ export const Home = () => {
   }, [categoryId, page]);
 
   return (
-    <div>
+    <div className="wrapper">
       <h1>Моя коллекция фотографий</h1>
       <div className="top">
         <ul className="tags">
@@ -55,6 +56,9 @@ export const Home = () => {
           className="search-input"
           placeholder="Поиск по названию"
         />
+        <Link to={"/addphoto"}>
+          <button className="top__button">Добавить новое фото</button>
+        </Link>
       </div>
       <div className="content">
         {isLoading ? (
@@ -87,3 +91,4 @@ export const Home = () => {
     </div>
   );
 };
+export default Home;
