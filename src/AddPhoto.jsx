@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 export const AddPhoto = () => {
   const [collections, setCollections] = React.useState();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     async function fetchCollection() {
@@ -20,27 +21,50 @@ export const AddPhoto = () => {
     }
     fetchCollection();
   }, []);
-  console.log(collections);
-  const navigate = useNavigate();
 
-  let submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault();
-    const imageURL = URL.createObjectURL(event.target.photo.files[0]);
+
     const imgCollection = event.target.collection.value;
-    let newPhoto = {
-      collection: imgCollection,
-      img: imageURL,
-    };
-    console.log(newPhoto.collection);
-    console.log(newPhoto.img);
-    collections.map((obj) => {
-      if (obj.name === newPhoto.collection) {
-        return obj.photos.push(newPhoto.img);
-      }
-    });
-    alert("The image was added successfully!");
-    navigate("/");
-    event.target.reset();
+
+    try {
+      const formData = new FormData();
+      formData.append("file", event.target.photo.files[0]);
+      formData.append("upload_preset", "ue8zcl33");
+
+      const imageResponse = await axios
+        .post(
+          `https://api.cloudinary.com/v1_1/dfbsctfmk/image/upload`,
+          formData
+        )
+        .then((response) => {
+          const url = response.data["secure_url"];
+          const currentCollection = collections.find(
+            (el) => el.name === imgCollection
+          );
+
+          const newCollection = {
+            ...currentCollection,
+            photos: [...currentCollection.photos, url],
+          };
+
+          axios
+            .put(
+              `https://640c6b47a3e07380e8f4148f.mockapi.io/collection/${currentCollection.id}`,
+              newCollection
+            )
+            .then(() => {
+              alert("The image was added successfully!");
+              navigate("/");
+              event.target.reset();
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
   if (!collections) {
     return "Loading ...";
