@@ -1,13 +1,14 @@
 import React from "react";
 import { Collection } from "./Collection";
-const categories = [
-  { name: "Все" },
-  { name: "Море" },
-  { name: "Горы" },
-  { name: "Архитектура" },
-  { name: "Города" },
+import { Link } from "react-router-dom";
+export const categories = [
+  { name: "All" },
+  { name: "Sea" },
+  { name: "Mountains" },
+  { name: "Architecture" },
+  { name: "Cities" },
 ];
-export const Home = () => {
+const Home = () => {
   const [categoryId, setCategoryId] = React.useState(0);
   const [page, setPage] = React.useState(1);
   const [isLoading, setIsLoading] = React.useState(true);
@@ -35,8 +36,8 @@ export const Home = () => {
   }, [categoryId, page]);
 
   return (
-    <div>
-      <h1>Моя коллекция фотографий</h1>
+    <div className="wrapper">
+      <h1>My Image Collection</h1>
       <div className="top">
         <ul className="tags">
           {categories.map((obj, i) => (
@@ -53,8 +54,11 @@ export const Home = () => {
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           className="search-input"
-          placeholder="Поиск по названию"
+          placeholder="Search for collections ..."
         />
+        <Link to={"/addphoto"}>
+          <button className="top__button">Add new Photo</button>
+        </Link>
       </div>
       <div className="content">
         {isLoading ? (
@@ -87,3 +91,4 @@ export const Home = () => {
     </div>
   );
 };
+export default Home;

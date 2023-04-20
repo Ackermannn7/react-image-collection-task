@@ -25,18 +25,20 @@ export const CollectionReview = () => {
   if (!collection) {
     return "Loading ...";
   }
-
+  console.log(collection.photos);
   return (
     <div className="collection-review">
       <h2>{collection.name}</h2>
       <div className="collection-review__images">
         {collection.photos.map((image) => (
-          <img src={image} alt={collection.name} />
+          <div className="responsive">
+            <img src={image} alt={collection.name} />
+          </div>
         ))}
       </div>
       <Link to="/">
-        <button className="button button--outline button--add">
-          <span>Назад</span>
+        <button className="collection-review__button">
+          <span>Back</span>
         </button>
       </Link>
     </div>
