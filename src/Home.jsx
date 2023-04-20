@@ -2,11 +2,11 @@ import React from "react";
 import { Collection } from "./Collection";
 import { Link } from "react-router-dom";
 export const categories = [
-  { name: "Все" },
-  { name: "Море" },
-  { name: "Горы" },
-  { name: "Архитектура" },
-  { name: "Города" },
+  { name: "All" },
+  { name: "Sea" },
+  { name: "Mountains" },
+  { name: "Architecture" },
+  { name: "Cities" },
 ];
 const Home = () => {
   const [categoryId, setCategoryId] = React.useState(0);
@@ -37,7 +37,7 @@ const Home = () => {
 
   return (
     <div className="wrapper">
-      <h1>Моя коллекция фотографий</h1>
+      <h1>My Image Collection</h1>
       <div className="top">
         <ul className="tags">
           {categories.map((obj, i) => (
@@ -54,10 +54,10 @@ const Home = () => {
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           className="search-input"
-          placeholder="Поиск по названию"
+          placeholder="Search for collections ..."
         />
         <Link to={"/addphoto"}>
-          <button className="top__button">Добавить новое фото</button>
+          <button className="top__button">Add new Photo</button>
         </Link>
       </div>
       <div className="content">

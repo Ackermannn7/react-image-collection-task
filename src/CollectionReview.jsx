@@ -38,7 +38,7 @@ export const CollectionReview = () => {
       </div>
       <Link to="/">
         <button className="collection-review__button">
-          <span>Назад</span>
+          <span>Back</span>
         </button>
       </Link>
     </div>

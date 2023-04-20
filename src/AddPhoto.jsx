@@ -75,7 +75,7 @@ export const AddPhoto = () => {
         <h1>Add new Photo</h1>
         <div className="addPhotoForm__block">
           <select name="collection" id="collection">
-            <option>---Выберите категорию---</option>
+            <option>---Choose the collection---</option>
             {collections.map((obj, i) => (
               <option key={i}>{obj.name}</option>
             ))}
@@ -90,7 +90,7 @@ export const AddPhoto = () => {
             <input className="addPhotoForm__block__button" type="submit" />
             <Link to="/">
               <button className="addPhotoForm__block__button">
-                <span>Назад</span>
+                <span>Back</span>
               </button>
             </Link>
           </div>
